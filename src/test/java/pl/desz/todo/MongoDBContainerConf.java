@@ -7,12 +7,12 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @TestConfiguration(proxyBeanMethods = false)
-class TestcontainersConfiguration {
+class MongoDBContainerConf {
 
     @Bean
     @ServiceConnection
     MongoDBContainer mongoDbContainer() {
-        return new MongoDBContainer(DockerImageName.parse("mongo:latest"));
+        return new MongoDBContainer(DockerImageName.parse("mongo:8.0.3"));
     }
 
 }

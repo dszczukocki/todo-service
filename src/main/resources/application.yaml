@@ -1,3 +1,6 @@
 spring:
   application:
     name: todo-service
+  data:
+    mongodb:
+      uri: mongodb://test:thepass@localhost:27017/test?authSource=admin

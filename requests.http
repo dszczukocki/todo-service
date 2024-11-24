@@ -1,0 +1,23 @@
+### Get all
+GET http://localhost:8080/todos
+Content-Type: application/json
+
+### Get by id
+GET http://localhost:8080/todos/{{id}}
+
+### Save
+POST http://localhost:8080/todos
+Content-Type: application/json
+
+{
+  "description": "content",
+  "assignee": {
+    "name": "test-assignee"
+  },
+  "priority": 1
+}
+
+### Delete by id
+DELETE http://localhost:8080/todos/{{id}}
+Content-Type: application/json
+

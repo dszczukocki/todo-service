@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.desz.todo.model.Todo;
@@ -27,17 +28,17 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    public Mono<Todo> getTodoById(@PathVariable Long id) {
+    public Mono<Todo> getTodoById(@PathVariable String id) {
         return todoService.getById(id);
     }
 
     @PostMapping
-    public Mono<Todo> addTodo(Mono<Todo> todoMono) {
+    public Mono<Todo> addTodo(@RequestBody Mono<Todo> todoMono) {
         return todoService.saveTodo(todoMono);
     }
 
     @DeleteMapping("/{id}")
-    public Mono<Void> deleteTodo(@PathVariable Long id) {
+    public Mono<Void> deleteTodo(@PathVariable String id) {
         return todoService.deleteTodoById(id);
     }
 }

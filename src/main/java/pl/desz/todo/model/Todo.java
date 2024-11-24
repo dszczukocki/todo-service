@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Todo {
 
     @Id
-    Long id;
+    String id;
     String description;
     User assignee;
     int priority;

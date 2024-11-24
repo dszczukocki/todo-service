@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 @WebFluxTest(controllers = TodoController.class)
 public class TodoApiTest {
 
-    private static final long TODO_ID = 1L;
+    private static final String TODO_ID = "1";
     private static final Todo TODO = new Todo(TODO_ID, "desc", new User("user1"), 1);
 
     @Autowired

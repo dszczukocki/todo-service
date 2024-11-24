@@ -19,7 +19,7 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public Mono<Todo> getById(Long id) {
+    public Mono<Todo> getById(String id) {
         return todoRepository.findById(id);
     }
 
@@ -27,7 +27,7 @@ public class TodoService {
         return todoMono.flatMap(todoRepository::save);
     }
 
-    public Mono<Void> deleteTodoById(Long id) {
+    public Mono<Void> deleteTodoById(String id) {
         return todoRepository.deleteById(id);
     }
 }

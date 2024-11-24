@@ -14,7 +14,7 @@ import reactor.test.StepVerifier;
 @SpringBootTest
 class TodoServiceApplicationTests {
 
-    private static final Long TODO_ID = 1L;
+    private static final String TODO_ID = "1";
     private static final String TODO_DESCRIPTION = "DESCRIPTION";
     private static final Todo TODO = new Todo(TODO_ID, TODO_DESCRIPTION, new User("user1"), 1);
 

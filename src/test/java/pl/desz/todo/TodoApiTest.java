@@ -9,6 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import pl.desz.todo.api.TodoController;
 import pl.desz.todo.model.Todo;
+import pl.desz.todo.model.User;
 import pl.desz.todo.service.TodoService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,6 +21,9 @@ import static org.mockito.Mockito.when;
 @WebFluxTest(controllers = TodoController.class)
 public class TodoApiTest {
 
+    private static final long TODO_ID = 1L;
+    private static final Todo TODO = new Todo(TODO_ID, "desc", new User("user1"), 1);
+
     @Autowired
     private WebTestClient webTestClient;
 
@@ -29,9 +33,7 @@ public class TodoApiTest {
     @Test
     void shouldGetAllTodos() {
         when(todoService.getAllTodos())
-                .thenReturn(Flux.just(
-                        new Todo(1L, "DESC"),
-                        new Todo(2L, "DESC")));
+                .thenReturn(Flux.just(TODO, TODO));
 
         webTestClient.get()
                 .uri("/todos")
@@ -43,23 +45,22 @@ public class TodoApiTest {
 
     @Test
     void shouldGetTodoById() {
-        final Todo todo = new Todo(1L, "DESC");
 
-        when(todoService.getById(1L))
-                .thenReturn(Mono.just(todo));
+        when(todoService.getById(TODO_ID))
+                .thenReturn(Mono.just(TODO));
 
         webTestClient.get()
                 .uri("/todos/1")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Todo.class)
-                .isEqualTo(todo);
+                .isEqualTo(TODO);
     }
 
     @Test
     void shouldSaveTodo() {
         when(todoService.saveTodo(any()))
-                .thenReturn(Mono.just(new Todo(1L, "DESC")));
+                .thenReturn(Mono.just(TODO));
 
         webTestClient.post()
                 .uri("/todos")
@@ -70,7 +71,7 @@ public class TodoApiTest {
 
     @Test
     void shouldDeleteTodo() {
-        when(todoService.deleteTodoById(1L))
+        when(todoService.deleteTodoById(TODO_ID))
                 .thenReturn(Mono.empty().then());
 
         webTestClient.delete()

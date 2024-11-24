@@ -15,5 +15,6 @@ public class Todo {
     @Id
     Long id;
     String description;
-
+    User assignee;
+    int priority;
 }
